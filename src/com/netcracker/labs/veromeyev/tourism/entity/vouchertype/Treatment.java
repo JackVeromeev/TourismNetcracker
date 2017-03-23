@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by jack on 22/03/17.
  */
-public class Treatment implements VoucherType {
+public class Treatment extends VoucherType {
 
     private MedicalCenter medicalCenter;
 

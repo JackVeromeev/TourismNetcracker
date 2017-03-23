@@ -8,11 +8,11 @@ import java.util.List;
 /**
  * Created by jack on 21/03/17.
  */
-public interface VoucherType {
-    default String getFullDescription() {
+public class VoucherType {
+    public String getFullDescription() {
         return toString();
     }
-    default List<? extends Place> getPlaces() {
+    public List<? extends Place> getPlaces() {
         return new ArrayList<>();
     }
 }

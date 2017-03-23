@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by jack on 23/03/17.
  */
-public class Cruise implements VoucherType {
+public class Cruise extends VoucherType {
 
     private String name;
     private Place departurePlace;

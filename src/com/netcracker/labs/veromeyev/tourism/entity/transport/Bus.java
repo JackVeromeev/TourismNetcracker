@@ -1,5 +1,6 @@
 package com.netcracker.labs.veromeyev.tourism.entity.transport;
 
+
 import com.netcracker.labs.veromeyev.tourism.util.BooleanUtil;
 
 /**

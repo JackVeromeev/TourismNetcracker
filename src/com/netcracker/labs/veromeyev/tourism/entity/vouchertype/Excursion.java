@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by jack on 23/03/17.
  */
-public class Excursion implements VoucherType {
+public class Excursion extends VoucherType {
 
     private String name;
     private List<Place> places;

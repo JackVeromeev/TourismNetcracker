@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by jack on 22/03/17.
  */
-public class Shopping implements VoucherType {
+public class Shopping extends VoucherType {
 
     private List<Shop> shops;
 
