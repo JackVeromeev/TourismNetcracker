@@ -1,4 +1,3 @@
-package com.netcracker.labs.veromeyev.tourism.util;
 
 /**
  * Created by jack on 23/03/17.
