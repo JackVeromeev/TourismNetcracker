@@ -1,18 +1,26 @@
 package com.netcracker.labs.veromeyev.tourism.entity.transport;
 
+import com.netcracker.labs.veromeyev.tourism.entity.JsonImpl;
+import org.json.simple.JSONObject;
+
 /**
  * Created by jack on 23/03/17.
  */
-public class Transport {
+public abstract class Transport implements JsonImpl{
 
     private double cost;
     private double hoursOnWay;
     private String description;
 
     public Transport(String description, double cost, double hoursOnWay) {
-        setDescription(description);
-        setHoursOnWay(hoursOnWay);
-        setCost(cost);
+        this.description = description;
+        this.hoursOnWay = hoursOnWay;
+        this.cost = cost;
+    }
+
+    public Transport(JSONObject o) {
+        this((String)o.get("description"), (Double) o.get("cost"),
+                (Double)o.get("hours on way"));
     }
 
     public double getCost() {
@@ -39,6 +47,7 @@ public class Transport {
         this.description = description;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -52,11 +61,13 @@ public class Transport {
                 && hoursOnWay == transport.getHoursOnWay();
     }
 
+    @Override
     public int hashCode() {
         return (description.hashCode() << 2) + ((int)cost << 1)
         + (int) hoursOnWay;
     }
 
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append(description);
@@ -64,5 +75,14 @@ public class Transport {
         builder.append("; time on the way: ").append(getHoursOnWay());
         builder.append(" hours;");
         return builder.toString();
+    }
+
+    @Override
+    public JSONObject toJSONObject() {
+        JSONObject object = new JSONObject();
+        object.put("cost", cost);
+        object.put("hours on way", hoursOnWay);
+        object.put("description", description);
+        return object;
     }
 }

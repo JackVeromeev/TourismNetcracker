@@ -1,9 +1,12 @@
 package com.netcracker.labs.veromeyev.tourism.entity.feeding;
 
+import com.netcracker.labs.veromeyev.tourism.entity.JsonImpl;
+import org.json.simple.JSONObject;
+
 /**
  * Created by jack on 23/03/17.
  */
-public class Feeding {
+public class Feeding implements JsonImpl{
 
     private boolean vegetarian;
     private double costPerDay;
@@ -37,5 +40,14 @@ public class Feeding {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public JSONObject toJSONObject() {
+        JSONObject object = new JSONObject();
+        object.put("description", description);
+        object.put("cost per day", Double.toString(costPerDay));
+        object.put("vegetarian", Boolean.toString(vegetarian));
+        return object;
     }
 }

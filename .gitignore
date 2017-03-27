@@ -1,6 +1,7 @@
 # IDEA folder
 
-./.idea/
+.idea/
+out/
 
 # Compiled class file
 *.class

@@ -1,6 +1,10 @@
 package com.netcracker.labs.veromeyev.tourism.entity.vouchertype;
 
+import com.netcracker.labs.veromeyev.tourism.constant.Name;
 import com.netcracker.labs.veromeyev.tourism.entity.place.Shop;
+import com.netcracker.labs.veromeyev.tourism.util.json.JsonWithType;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +12,12 @@ import java.util.List;
 /**
  * Created by jack on 22/03/17.
  */
-public class Shopping extends VoucherType {
+public class Shopping implements VoucherType {
 
     private List<Shop> shops;
 
     public Shopping(List<Shop> shops) {
-        setShops(shops);
+        this.shops = shops;
     }
 
     public Shopping() {
@@ -31,6 +35,7 @@ public class Shopping extends VoucherType {
         this.shops = shops;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -41,10 +46,12 @@ public class Shopping extends VoucherType {
         return shops.equals( ((Shopping) o).getShops() );
     }
 
+    @Override
     public int hashCode() {
         return shops.hashCode();
     }
 
+    @Override
     public String toString() {
         if (shops.size() == 0) {
             return "";
@@ -69,5 +76,17 @@ public class Shopping extends VoucherType {
     @Override
     public List<Shop> getPlaces() {
         return getShops();
+    }
+
+    @Override
+    public JSONObject toJSONObject(){
+        JSONObject object = new JSONObject();
+        JSONArray array = new JSONArray();
+        for (Shop shop : shops) {
+            array.add(shop.toJSONObject());
+        }
+        object.put("shops", array);
+        return new JsonWithType(object,
+                Name.Entity.VoucherType.SHOPPING).getObject();
     }
 }

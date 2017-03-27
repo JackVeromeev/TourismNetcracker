@@ -10,28 +10,24 @@ import java.util.List;
 /**
  * Created by jack on 23/03/17.
  */
-public class Voucher {
+public class CustomizableVoucher {
 
     private VoucherType type;
     private List<Integer> availableDurations;
     private List<Date> availableStarts;
     private List<Feeding> availableFeeding;
     private List<Transport> availableDeliveryTransports;
-    private boolean usingTransportWhileTour;
-    private Transport transportWhileTour;
 
-    public Voucher(VoucherType voucherType, List<Integer> availableDurations,
-                   List<Date> availableStarts, List<Feeding> availableFeeding,
-                   List<Transport> availableDeliveryTransports,
-                   boolean usingTransportWhileTour,
-                   Transport transportWhileTour) {
-        setType(voucherType);
-        setAvailableDurations(availableDurations);
-        setAvailableStarts(availableStarts);
-        setAvailableFeeding(availableFeeding);
-        setAvailableDeliveryTransports(availableDeliveryTransports);
-        setUsingTransportWhileTour(usingTransportWhileTour);
-        setTransportWhileTour(transportWhileTour);
+    public CustomizableVoucher(VoucherType voucherType,
+                               List<Integer> availableDurations,
+                               List<Date> availableStarts,
+                               List<Feeding> availableFeeding,
+                               List<Transport> availableDeliveryTransports) {
+        this.type = voucherType;
+        this.availableDurations = availableDurations;
+        this.availableStarts = availableStarts;
+        this.availableFeeding = availableFeeding;
+        this.availableDeliveryTransports = availableDeliveryTransports;
     }
 
     public VoucherType getType() {
@@ -75,19 +71,4 @@ public class Voucher {
         this.availableDeliveryTransports = availableDeliveryTransports;
     }
 
-    public boolean isUsingTransportWhileTour() {
-        return usingTransportWhileTour;
-    }
-
-    public void setUsingTransportWhileTour(boolean usingTransportWhileTour) {
-        this.usingTransportWhileTour = usingTransportWhileTour;
-    }
-
-    public Transport getTransportWhileTour() {
-        return transportWhileTour;
-    }
-
-    public void setTransportWhileTour(Transport transportWhileTour) {
-        this.transportWhileTour = transportWhileTour;
-    }
 }

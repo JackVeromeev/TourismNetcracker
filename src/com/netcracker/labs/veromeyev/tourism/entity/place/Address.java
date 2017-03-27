@@ -1,12 +1,14 @@
 package com.netcracker.labs.veromeyev.tourism.entity.place;
 
+import com.netcracker.labs.veromeyev.tourism.entity.JsonImpl;
 import com.netcracker.labs.veromeyev.tourism.util.StringUtil;
+import org.json.simple.JSONObject;
 
 /**
  * Created by jack on 21/03/17.
  * @author jack veromeyev
  */
-public class Address {
+public class Address implements JsonImpl {
 
     private String state;
     private String region;
@@ -15,10 +17,10 @@ public class Address {
 
     public Address(String state, String region,
                    String city, String localAddress) {
-        setState(state);
-        setRegion(region);
-        setCity(city);
-        setLocalAddress(localAddress);
+        this.state = state;
+        this.region = region;
+        this.city = city;
+        this.localAddress = localAddress;
     }
 
     public Address() {
@@ -28,6 +30,13 @@ public class Address {
     public Address(Address address) {
         this(address.getState(), address.getRegion(),
                 address.getCity(), address.getLocalAddress());
+    }
+
+    public Address(JSONObject object) {
+        this.state = (String) object.get("state");
+        this.region = (String) object.get("region");
+        this.city = (String) object.get("city");
+        this.localAddress = (String) object.get("local address");
     }
 
     public String getState() {
@@ -62,6 +71,7 @@ public class Address {
         this.localAddress = localAddress;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (o == this) {
             return true;
@@ -76,11 +86,13 @@ public class Address {
                 localAddress.equals(address.getLocalAddress());
     }
 
+    @Override
     public int hashCode() {
         return (state.hashCode() << 3) + (region.hashCode() << 2)
                 + (city.hashCode() << 1) + localAddress.hashCode();
     }
 
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append(localAddress);
@@ -96,4 +108,13 @@ public class Address {
         return builder.toString();
     }
 
+    @Override
+    public JSONObject toJSONObject() {
+        JSONObject object = new JSONObject();
+        object.put("state", state);
+        object.put("region", region);
+        object.put("city", city);
+        object.put("local address", localAddress);
+        return object;
+    }
 }

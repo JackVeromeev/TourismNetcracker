@@ -1,28 +1,49 @@
 package com.netcracker.labs.veromeyev.tourism.entity.place;
 
+import com.netcracker.labs.veromeyev.tourism.constant.Name;
+import com.netcracker.labs.veromeyev.tourism.entity.JsonImpl;
 import com.netcracker.labs.veromeyev.tourism.util.StringUtil;
+import com.netcracker.labs.veromeyev.tourism.util.json.JsonWithType;
+import org.json.simple.JSONObject;
 
 /**
  * Created by jack on 22/03/17.
  */
-public class Hotel extends  Place {
+public class Hotel extends  Place implements JsonImpl{
+
     private String hotelType;
     private int rate;
     private double kmFromSea;
     private double kmFromCity;
 
+    public Hotel(Address address, String placeName, String description,
+                 String hotelType, int rate, double kmFromCity,
+                 double kmFromSea) {
+        super(new Place(address, placeName, description));
+        this.hotelType = hotelType;
+        this.rate = rate;
+        this.kmFromCity = kmFromCity;
+        this.kmFromSea = kmFromSea;
+    }
+
     public Hotel(Place place, String hotelType, int rate,
           double kmFromCity, double kmFromSea) {
         super(place);
-        setHotelType(hotelType);
-        setRate(rate);
-        setKmFromCity(kmFromCity);
-        setKmFromSea(kmFromSea);
+        this.hotelType = hotelType;
+        this.rate = rate;
+        this.kmFromCity = kmFromCity;
+        this.kmFromSea = kmFromSea;
     }
 
     public Hotel(Hotel hotel) {
         this(hotel, hotel.getHotelType(), hotel.getRate(),
                 hotel.getKmFromCity(), hotel.getKmFromSea());
+    }
+
+    public Hotel(JSONObject o) {
+        this(new Place(o), (String)o.get("hotel type"), (Integer)o.get("rate"),
+                (Double)o.get("km from city"), (Double)o.get("km from sea")
+        );
     }
 
     public Hotel() {
@@ -61,6 +82,7 @@ public class Hotel extends  Place {
         this.kmFromCity = kmFromCity;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -75,6 +97,7 @@ public class Hotel extends  Place {
                 && (kmFromCity == hotel.getKmFromCity());
     }
 
+    @Override
     public int hashCode() {
         return (super.hashCode() << 4) +
                 (hotelType.hashCode() << 3) +
@@ -83,6 +106,7 @@ public class Hotel extends  Place {
                 ((int) kmFromSea);
     }
 
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append(hotelType);
@@ -106,5 +130,20 @@ public class Hotel extends  Place {
             builder.append(")");
         }
         return builder.toString();
+    }
+
+    @Override
+    public JSONObject toJSONObject() {
+
+        // call Place.toJSONObject()
+        JsonWithType objectWithType = new JsonWithType(super.toJSONObject());
+        objectWithType.getInnerObject().put("hotel type", hotelType);
+        objectWithType.getInnerObject().put("rate", rate);
+        objectWithType.getInnerObject().put("km from sea", kmFromSea);
+        objectWithType.getInnerObject().put("km from city", kmFromCity);
+
+        // override type of superclass
+        objectWithType.setType(Name.Entity.Place.HOTEL);
+        return objectWithType.getObject();
     }
 }

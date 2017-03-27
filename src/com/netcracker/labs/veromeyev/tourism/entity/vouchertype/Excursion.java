@@ -1,24 +1,29 @@
 package com.netcracker.labs.veromeyev.tourism.entity.vouchertype;
 
+import com.netcracker.labs.veromeyev.tourism.constant.Name;
 import com.netcracker.labs.veromeyev.tourism.entity.place.Place;
+import com.netcracker.labs.veromeyev.tourism.util.json.JsonWithType;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import java.util.List;
 
 /**
  * Created by jack on 23/03/17.
  */
-public class Excursion extends VoucherType {
+public class Excursion implements VoucherType {
 
     private String name;
     private List<Place> places;
     private String guideName;
 
     public Excursion(String name, String guideName, List<Place> places) {
-        setName(name);
-        setGuideName(guideName);
-        setPlaces(places);
+        this.name = name;
+        this.guideName = guideName;
+        this.places = places;
     }
 
+    @Override
     public List<Place> getPlaces() {
         return places;
     }
@@ -43,6 +48,7 @@ public class Excursion extends VoucherType {
         this.name = name;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -56,12 +62,14 @@ public class Excursion extends VoucherType {
                 && places.equals(excursion.getPlaces());
     }
 
+    @Override
     public int hashCode() {
         return (name.hashCode() << 2)
                 + (guideName.hashCode() << 1)
                 + places.hashCode();
     }
 
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("Excursion \"").append(name).append("\"");
@@ -86,4 +94,19 @@ public class Excursion extends VoucherType {
         return toString();
     }
 
+    @Override
+    public JSONObject toJSONObject(){
+        JSONObject object = new JSONObject();
+        object.put("name", name);
+
+        JSONArray array = new JSONArray();
+        for (Place place : places) {
+            array.add(place.toJSONObject());
+        }
+        object.put("places", array);
+
+        object.put("guide name", guideName);
+        return new JsonWithType(object,
+                Name.Entity.VoucherType.EXCURSION).getObject();
+    }
 }

@@ -1,11 +1,15 @@
 package com.netcracker.labs.veromeyev.tourism.entity.place;
 
+import com.netcracker.labs.veromeyev.tourism.constant.Name;
+import com.netcracker.labs.veromeyev.tourism.entity.JsonImpl;
 import com.netcracker.labs.veromeyev.tourism.util.StringUtil;
+import com.netcracker.labs.veromeyev.tourism.util.json.JsonWithType;
+import org.json.simple.JSONObject;
 
 /**
  * Created by jack on 21/03/17.
  */
-public class Place {
+public class Place implements JsonImpl {
 
     protected Address address;
     protected String placeName;
@@ -19,15 +23,22 @@ public class Place {
     }
 
     public Place(Address address, String placeName, String description) {
-        setAddress(address);
-        setPlaceName(placeName);
-        setDescription(description);
+        this.address = address;
+        this.placeName = placeName;
+        this.description = description;
     }
 
     public Place(Place place) {
         this(place.getAddress(),
                 place.getPlaceName(),
                 place.getDescription()
+        );
+    }
+
+    public Place(JSONObject object) {
+        this(new Address((JSONObject) object.get("address")),
+                (String) object.get("place name"),
+                (String) object.get("description")
         );
     }
 
@@ -56,13 +67,10 @@ public class Place {
     }
 
     public void setAddress(Address address) {
-        if (address == null) {
-            address = new Address();
-        }
         this.address = address;
     }
 
-
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -76,27 +84,40 @@ public class Place {
                 address.equals(place.getAddress());
     }
 
+    @Override
     public int hashCode() {
         return (address.hashCode() << 2) +
                 (placeName.hashCode() << 1) +
                 description.hashCode();
     }
 
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
         builder.append(placeName);
 
         if (description.length() > 0) {
-            StringUtil.appendIfNotEmpty(builder, " (" + description + ")");
+            StringUtil.appendIfNotEmpty(builder,
+                    " (" + description + ")");
         }
         else builder.append(description);
 
         String fullAddress = address.toString();
         if (fullAddress.length() > 0) {
-            StringUtil.appendIfNotEmpty(builder, " ").append(fullAddress);
+            StringUtil.appendIfNotEmpty(builder, " ");
+            builder.append(fullAddress);
         }
-
         return  builder.toString();
+    }
+
+    @Override
+    public JSONObject toJSONObject() {
+        JSONObject innerObject = new JSONObject();
+        innerObject.put("address", address.toJSONObject());
+        innerObject.put("place name", placeName);
+        innerObject.put("description", description);
+        return new JsonWithType(innerObject, Name.Entity.Place.PLACE)
+                .getObject();
     }
 }

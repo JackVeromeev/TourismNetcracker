@@ -1,7 +1,10 @@
 package com.netcracker.labs.veromeyev.tourism.entity.transport;
 
 
+import com.netcracker.labs.veromeyev.tourism.constant.Name;
 import com.netcracker.labs.veromeyev.tourism.util.BooleanUtil;
+import com.netcracker.labs.veromeyev.tourism.util.json.JsonWithType;
+import org.json.simple.JSONObject;
 
 /**
  * Created by jack on 23/03/17.
@@ -15,9 +18,16 @@ public class Bus extends Transport {
     public Bus(String description, double cost, double hoursOnWay,
                boolean hasToilet, boolean hasTV, boolean hasWifi) {
         super(description, cost, hoursOnWay);
-        setHasToilet(hasToilet);
-        setHasTV(hasTV);
-        setHasWifi(hasWifi);
+        this.hasToilet = hasToilet;
+        this.hasTV = hasTV;
+        this.hasWifi = hasWifi;
+    }
+
+    public Bus(JSONObject o) {
+        super(o);
+        this.hasToilet = (Boolean) o.get("toilet");
+        this.hasTV = (Boolean) o.get("TV");
+        this.hasWifi = (Boolean) o.get("Wi-Fi");
     }
 
     public boolean isHasTV() {
@@ -44,6 +54,7 @@ public class Bus extends Transport {
         this.hasWifi = hasWifi;
     }
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -56,11 +67,13 @@ public class Bus extends Transport {
                 && hasWifi == bus.isHasWifi() && hasTV == bus.isHasTV();
     }
 
+    @Override
     public int hashCode() {
         return (super.hashCode() << 3) + (BooleanUtil.toInt(hasWifi) << 2)
         + (BooleanUtil.toInt(hasToilet) << 1) + BooleanUtil.toInt(hasTV);
     }
 
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("Bus: ").append(super.toString());
@@ -70,4 +83,12 @@ public class Bus extends Transport {
         return builder.toString();
     }
 
+    @Override
+    public JSONObject toJSONObject() {
+        JSONObject object = super.toJSONObject();
+        object.put("TV", hasTV);
+        object.put("toilet", hasToilet);
+        object.put("Wi-Fi", hasWifi);
+        return new JsonWithType(object, Name.Entity.Transport.BUS).getObject();
+    }
 }

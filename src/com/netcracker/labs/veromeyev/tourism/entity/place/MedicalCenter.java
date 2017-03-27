@@ -1,5 +1,10 @@
 package com.netcracker.labs.veromeyev.tourism.entity.place;
 
+import com.netcracker.labs.veromeyev.tourism.constant.Name;
+import com.netcracker.labs.veromeyev.tourism.util.json.JsonWithType;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +18,12 @@ public class MedicalCenter extends Place {
     public MedicalCenter(Address address, String placeName, String description,
                 List<String> treatmentPrograms) {
         super(address, placeName, description);
-        setTreatmentPrograms(treatmentPrograms);
+        this.treatmentPrograms = treatmentPrograms;
+    }
+
+    public MedicalCenter(Place place, List<String> treatmentPrograms) {
+        super(place);
+        this.treatmentPrograms = treatmentPrograms;
     }
 
     public MedicalCenter(MedicalCenter medicalCenter) {
@@ -24,6 +34,15 @@ public class MedicalCenter extends Place {
 
     public MedicalCenter() {
         this(new Address(), "", "", new ArrayList<>());
+    }
+
+    public MedicalCenter(JSONObject o) {
+        super(o);
+        JSONArray jsonStock = (JSONArray) o.get("treatment programs");
+        treatmentPrograms = new ArrayList<>( jsonStock.size());
+        for (Object program : jsonStock) {
+            treatmentPrograms.add((String) program);
+        }
     }
 
     public List<String> getTreatmentPrograms() {
@@ -53,11 +72,11 @@ public class MedicalCenter extends Place {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         if (placeName.length() > 0) {
-            builder.append("Shop ");
+            builder.append("Medical center ");
         }
         builder.append(super.toString());
         if (treatmentPrograms.size() > 0) {
-            builder.append(" Treatment program(s): ");
+            builder.append(". Treatment program(s): ");
             boolean firstElement = true;
             for (String thingType : treatmentPrograms) {
                 if (firstElement) {
@@ -69,6 +88,21 @@ public class MedicalCenter extends Place {
             }
         }
         return builder.toString();
+    }
+
+    @Override
+    public JSONObject toJSONObject() {
+        // call Place.toJSONObject
+        JsonWithType objectWithType = new JsonWithType(super.toJSONObject());
+        JSONArray programArray = new JSONArray();
+        for (String program : treatmentPrograms) {
+            programArray.add(program);
+        }
+        objectWithType.getInnerObject().put("treatment programs",
+                programArray);
+        // override type of superclass
+        objectWithType.setType(Name.Entity.Place.MEDICAL_CENTER);
+        return objectWithType.getObject();
     }
 
 }
