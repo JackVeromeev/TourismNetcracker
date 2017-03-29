@@ -1,6 +1,7 @@
 package com.netcracker.labs.veromeyev.tourism.entity.vouchertype;
 
 import com.netcracker.labs.veromeyev.tourism.constant.Name;
+import com.netcracker.labs.veromeyev.tourism.entity.EntityFactory;
 import com.netcracker.labs.veromeyev.tourism.entity.place.Place;
 import com.netcracker.labs.veromeyev.tourism.entity.transport.Transport;
 import com.netcracker.labs.veromeyev.tourism.util.json.JsonWithType;
@@ -31,6 +32,7 @@ public class Cruise implements VoucherType {
     }
 
     public Cruise(JSONObject o) {
+        EntityFactory factory = new EntityFactory();
         this.name = (String) o.get("name");
 
         JSONArray jsonWaterBodies = (JSONArray) o.get("water bodies");
@@ -39,8 +41,12 @@ public class Cruise implements VoucherType {
             waterBodies.add((String) waterBody);
         }
 
-
-        // TODO finish after creation factories
+        this.departurePlace = factory.newPlace(
+                (JSONObject) o.get("departure place"));
+        this.arrivalPlace = factory.newPlace(
+                (JSONObject) o.get("arrival place"));
+        this.transport = factory.newTransport(
+                (JSONObject) o.get("transport"));
     }
 
     public Place getDeparturePlace() {
@@ -89,7 +95,7 @@ public class Cruise implements VoucherType {
         if (this == o) {
             return true;
         }
-        if ( !(o instanceof Place)) {
+        if ( !(o instanceof Cruise)) {
             return false;
         }
         Cruise cruise = (Cruise) o;
@@ -97,7 +103,7 @@ public class Cruise implements VoucherType {
                 && departurePlace.equals(cruise.getDeparturePlace())
                 && arrivalPlace.equals(cruise.getArrivalPlace())
                 && waterBodies.equals(cruise.getWaterBodies())
-                  && transport.equals(cruise.getTransport());
+                && transport.equals(cruise.getTransport());
     }
 
     @Override

@@ -1,11 +1,13 @@
 package com.netcracker.labs.veromeyev.tourism.entity.vouchertype;
 
 import com.netcracker.labs.veromeyev.tourism.constant.Name;
+import com.netcracker.labs.veromeyev.tourism.entity.EntityFactory;
 import com.netcracker.labs.veromeyev.tourism.entity.place.Place;
 import com.netcracker.labs.veromeyev.tourism.util.json.JsonWithType;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -21,6 +23,18 @@ public class Excursion implements VoucherType {
         this.name = name;
         this.guideName = guideName;
         this.places = places;
+    }
+
+    public Excursion(JSONObject o) {
+        this.name = (String) o.get("name");
+        this.guideName = (String) o.get("guide name");
+
+        EntityFactory factory = new EntityFactory();
+        JSONArray placeArray = (JSONArray) o.get("places");
+        places = new LinkedList<>();
+        for (Object jsonPlace : placeArray) {
+            places.add(factory.newPlace((JSONObject)jsonPlace));
+        }
     }
 
     @Override

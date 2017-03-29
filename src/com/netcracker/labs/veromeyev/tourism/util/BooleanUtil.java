@@ -1,6 +1,7 @@
 package com.netcracker.labs.veromeyev.tourism.util;
 
 /**
+ * Contains different methods to work with boolean
  * Created by jack on 23/03/17.
  */
 public class BooleanUtil {
@@ -11,7 +12,7 @@ public class BooleanUtil {
      * @return integer equivalent
      */
     public static int toInt(boolean param) {
-        return Boolean.compare(param, false);
+        return param ? 1 : 0;
     }
 
     /**
@@ -21,17 +22,13 @@ public class BooleanUtil {
      * @return string yes/no equivalent
      */
     public static String toYN(boolean param) {
-        if (param) {
-            return "yes";
-        } else {
-            return "no";
-        }
+        return param ? "yes" : "no";
     }
 
     /**
      * Converts boolean variable to Strings
      * True converts to "yes", False - to "no".
-     * if firstLetterUp is set as true outcoming strings
+     * if firstLetterUp is set as true output strings
      * will be "Yes" and "No"
      * @param param boolean variable to transform
      * @param firstLetterUp if true, first letter of string will be uppercase

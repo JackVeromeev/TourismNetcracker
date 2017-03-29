@@ -1,6 +1,7 @@
 package com.netcracker.labs.veromeyev.tourism.entity.vouchertype;
 
 import com.netcracker.labs.veromeyev.tourism.constant.Name;
+import com.netcracker.labs.veromeyev.tourism.entity.EntityFactory;
 import com.netcracker.labs.veromeyev.tourism.entity.place.Shop;
 import com.netcracker.labs.veromeyev.tourism.util.json.JsonWithType;
 import org.json.simple.JSONArray;
@@ -21,7 +22,16 @@ public class Shopping implements VoucherType {
     }
 
     public Shopping() {
-        this(null);
+        this(new ArrayList<>());
+    }
+
+    public Shopping(JSONObject o) {
+        EntityFactory factory = new EntityFactory();
+        JSONArray shopArray = (JSONArray) o.get("shops");
+        shops = new ArrayList<>(shopArray.size());
+        for (Object shop : shopArray) {
+            shops.add((Shop)factory.newPlace((JSONObject)shop));
+        }
     }
 
     public List<Shop> getShops() {
@@ -75,7 +85,7 @@ public class Shopping implements VoucherType {
 
     @Override
     public List<Shop> getPlaces() {
-        return getShops();
+        return shops;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.netcracker.labs.veromeyev.tourism.entity.place;
 
 import com.netcracker.labs.veromeyev.tourism.constant.Name;
-import com.netcracker.labs.veromeyev.tourism.entity.JsonImpl;
+import com.netcracker.labs.veromeyev.tourism.entity.JSONable;
 import com.netcracker.labs.veromeyev.tourism.util.StringUtil;
 import com.netcracker.labs.veromeyev.tourism.util.json.JsonWithType;
 import org.json.simple.JSONObject;
@@ -9,7 +9,7 @@ import org.json.simple.JSONObject;
 /**
  * Created by jack on 21/03/17.
  */
-public class Place implements JsonImpl {
+public class Place implements JSONable {
 
     protected Address address;
     protected String placeName;

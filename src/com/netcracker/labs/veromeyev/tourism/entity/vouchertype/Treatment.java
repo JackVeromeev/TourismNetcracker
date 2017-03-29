@@ -1,6 +1,7 @@
 package com.netcracker.labs.veromeyev.tourism.entity.vouchertype;
 
 import com.netcracker.labs.veromeyev.tourism.constant.Name;
+import com.netcracker.labs.veromeyev.tourism.entity.EntityFactory;
 import com.netcracker.labs.veromeyev.tourism.entity.place.MedicalCenter;
 import com.netcracker.labs.veromeyev.tourism.entity.place.Place;
 import com.netcracker.labs.veromeyev.tourism.util.json.JsonWithType;
@@ -22,6 +23,12 @@ public class Treatment implements VoucherType {
 
     public Treatment(Treatment treatment) {
         this(treatment.getMedicalCenter());
+    }
+
+    public Treatment(JSONObject o) {
+        EntityFactory factory = new EntityFactory();
+        medicalCenter = (MedicalCenter) factory.newPlace(
+                (JSONObject)o.get("medical center"));
     }
 
     public MedicalCenter getMedicalCenter() {
