@@ -73,6 +73,12 @@ public class Feeding implements JSONable {
     }
 
     @Override
+    public String toString() {
+        return description + ", vegetarian: " + BooleanUtil.toYN(vegetarian)
+                +", cost per day: " + costPerDay;
+    }
+
+    @Override
     public int hashCode() {
         return (description.hashCode() << 2)
                 + (((int) costPerDay) << 1)

@@ -7,6 +7,8 @@ import com.netcracker.labs.veromeyev.tourism.entity.transport.Ship;
 import com.netcracker.labs.veromeyev.tourism.entity.transport.Transport;
 import com.netcracker.labs.veromeyev.tourism.entity.vouchertype.Cruise;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -25,7 +27,7 @@ class CustomizableVoucherTest {
     CustomizableVoucher customizableVoucher, newCustomizableVoucher;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws ParseException {
         customizableVoucher = new CustomizableVoucher(
                 new Cruise(
                         "Dniper",
@@ -49,9 +51,12 @@ class CustomizableVoucherTest {
                 new ArrayList<Transport>() {{
                     add(new Bus("simple bus", 10, 2,
                             false, false, true));
-                }}
+                }},
+                50
         );
-        JSONObject o = customizableVoucher.toJSONObject();
+        JSONObject o = (JSONObject) new JSONParser().parse(
+                customizableVoucher.toJSONObject().toString()
+        );
         newCustomizableVoucher = new CustomizableVoucher(o);
     }
 

@@ -95,7 +95,7 @@ public class Place implements JSONable {
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        builder.append(placeName);
+        builder.append("\"").append(placeName).append("\"");
 
         if (description.length() > 0) {
             StringUtil.appendIfNotEmpty(builder,

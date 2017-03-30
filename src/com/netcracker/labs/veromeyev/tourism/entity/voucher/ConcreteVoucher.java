@@ -19,24 +19,40 @@ public class ConcreteVoucher implements JSONable{
     private LocalDateTime start;
     private Feeding feeding;
     private Transport deliveryTransport;
+    private double costPerDay;
 
     public ConcreteVoucher(VoucherType type, int duration, LocalDateTime start,
-                           Feeding feeding, Transport deliveryTransport) {
+                           Feeding feeding, Transport deliveryTransport,
+                           double costPerDay) {
         this.type = type;
         this.duration = duration;
         this.start = start;
         this.feeding = feeding;
         this.deliveryTransport = deliveryTransport;
+        this.costPerDay = costPerDay;
+    }
+
+    public ConcreteVoucher(CustomizableVoucher voucher,
+                           int durationNum, int startNum,
+                           int feedingNum, int transportNum) {
+        this.type = voucher.getType();
+        this.duration = voucher.getAvailableDuration().get(durationNum);
+        this.start = voucher.getAvailableStart().get(startNum);
+        this.feeding = voucher.getAvailableFeeding().get(feedingNum);
+        this.deliveryTransport =
+                voucher.getAvailableDeliveryTransport().get(transportNum);
+        this.costPerDay = voucher.getCostPerDay();
     }
 
     public ConcreteVoucher(JSONObject o) {
         EntityFactory factory = new EntityFactory();
         this.type = factory.newVoucherType((JSONObject) o.get("type"));
-        this.duration = (Integer) o.get("duration");
-        this.start = (LocalDateTime) o.get("start");
+        this.duration = ((Long) o.get("duration")).intValue();
+        this.start = LocalDateTime.parse((String) o.get("start"));
         this.feeding = new Feeding((JSONObject) o.get("feeding"));
         this.deliveryTransport =
                 factory.newTransport((JSONObject) o.get("delivery transport"));
+        this.costPerDay = (Double) o.get("cost per day");
     }
 
     public VoucherType getType() {
@@ -79,6 +95,19 @@ public class ConcreteVoucher implements JSONable{
         this.deliveryTransport = deliveryTransport;
     }
 
+    public double getCostPerDay() {
+        return costPerDay;
+    }
+
+    public void setCostPerDay(double costPerDay) {
+        this.costPerDay = costPerDay;
+    }
+
+    public double getTotalCost() {
+        return duration * (costPerDay + feeding.getCostPerDay())
+                + deliveryTransport.getCost();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -112,12 +141,13 @@ public class ConcreteVoucher implements JSONable{
 
         o.put("duration", duration);
 
-        o.put("start", start);
+        o.put("start", start.toString());
 
         o.put("feeding", feeding.toJSONObject());
 
         o.put("delivery transport", deliveryTransport.toJSONObject());
 
+        o.put("cost per day", costPerDay);
         return o;
     }
 

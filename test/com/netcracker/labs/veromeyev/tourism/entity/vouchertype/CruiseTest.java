@@ -3,6 +3,9 @@ package com.netcracker.labs.veromeyev.tourism.entity.vouchertype;
 import com.netcracker.labs.veromeyev.tourism.entity.EntityFactory;
 import com.netcracker.labs.veromeyev.tourism.entity.place.Place;
 import com.netcracker.labs.veromeyev.tourism.entity.transport.Ship;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +22,7 @@ class CruiseTest {
     VoucherType cruise, newCruise;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws ParseException {
         cruise = new Cruise(
                 "Andorra to Washington",
                 new Place("Andorra", "Andorra", "Andorra la veya",
@@ -32,7 +35,11 @@ class CruiseTest {
                 new Ship(
                         "liner Black Dimond", 911, 100, 4, true)
         );
-        newCruise = new EntityFactory().newVoucherType(cruise.toJSONObject());
+        newCruise = new EntityFactory().newVoucherType(
+                (JSONObject) new JSONParser().parse(
+                        cruise.toJSONObject().toString()
+                )
+        );
     }
 
     @Test

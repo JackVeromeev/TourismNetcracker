@@ -3,6 +3,9 @@ package com.netcracker.labs.veromeyev.tourism.entity.vouchertype;
 import com.netcracker.labs.veromeyev.tourism.entity.EntityFactory;
 import com.netcracker.labs.veromeyev.tourism.entity.place.Hotel;
 import com.netcracker.labs.veromeyev.tourism.entity.place.Place;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +22,7 @@ class ExcursionTest {
     VoucherType excursion, newExcursion;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws ParseException {
         excursion = new Excursion(
                 "Andorra to Washingtonexcursion",
                 "Husein Barak ben Obamenladen",
@@ -31,7 +34,11 @@ class ExcursionTest {
                             "Hotel", 5, 0, 4));
                 }}
         );
-        newExcursion = new EntityFactory().newVoucherType(excursion.toJSONObject());
+        newExcursion = new EntityFactory().newVoucherType(
+                (JSONObject) new JSONParser().parse(
+                        excursion.toJSONObject().toString()
+                )
+        );
     }
 
     @Test

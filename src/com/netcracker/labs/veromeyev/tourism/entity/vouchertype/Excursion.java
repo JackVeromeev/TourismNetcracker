@@ -88,15 +88,15 @@ public class Excursion implements VoucherType {
         StringBuilder builder = new StringBuilder();
         builder.append("Excursion \"").append(name).append("\"");
         if (guideName.length() > 0) {
-            builder.append("\nGuide name: ").append(guideName);
+            builder.append("\n Guide name: ").append(guideName);
         }
         if (places.size() > 0) {
-            builder.append("Place(s):");
+            builder.append(".\n Place(s):");
             if (places.size() == 1) {
                 builder.append(" ").append(places.get(0).toString());
             } else {
                 for (Place place : places) {
-                    builder.append("\n").append(place.toString());
+                    builder.append("\n    ").append(place.toString());
                 }
             }
         }

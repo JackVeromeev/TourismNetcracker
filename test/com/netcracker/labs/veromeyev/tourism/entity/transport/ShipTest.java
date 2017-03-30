@@ -1,6 +1,9 @@
 package com.netcracker.labs.veromeyev.tourism.entity.transport;
 
 import com.netcracker.labs.veromeyev.tourism.entity.EntityFactory;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +18,13 @@ class ShipTest {
     Transport ship, newShip;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws ParseException {
         ship = new Ship("Olimphic", 20, 15, 3, true);
-        newShip = new EntityFactory().newTransport(ship.toJSONObject());
+        newShip = new EntityFactory().newTransport(
+                (JSONObject) new JSONParser().parse(
+                        ship.toJSONObject().toString()
+                )
+        );
     }
 
     @Test

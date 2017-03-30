@@ -6,6 +6,8 @@ import com.netcracker.labs.veromeyev.tourism.entity.place.Shop;
 import com.netcracker.labs.veromeyev.tourism.entity.transport.Plane;
 import com.netcracker.labs.veromeyev.tourism.entity.vouchertype.Shopping;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +26,7 @@ class ConcreteVoucherTest {
     ConcreteVoucher concreteVoucher, newConcreateVoucher;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws ParseException {
         concreteVoucher = new ConcreteVoucher(
                 new Shopping(
                         new ArrayList<Shop>() {{
@@ -45,10 +47,13 @@ class ConcreteVoucherTest {
                 3,
                 LocalDateTime.of(2017, Month.AUGUST, 20, 12, 30),
                 new Feeding(false, 12, "soboika"),
-                new Plane("airbus A380", 120, 2, true, true, true)
+                new Plane("airbus A380", 120, 2, true, true, true),
+                12.66
         );
 
-        JSONObject o = concreteVoucher.toJSONObject();
+        JSONObject o = (JSONObject) new JSONParser().parse(
+                concreteVoucher.toJSONObject().toString()
+        );
 
         newConcreateVoucher = new ConcreteVoucher(o);
     }

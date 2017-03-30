@@ -80,7 +80,7 @@ public class Plane extends Transport {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("Plane: ").append(super.toString());
-        builder.append("\nFirst class: ");
+        builder.append(". First class: ");
         builder.append(BooleanUtil.toYN(hasFirstClass));
         builder.append(", econom class: ");
         builder.append(BooleanUtil.toYN(hasEconomyClass));

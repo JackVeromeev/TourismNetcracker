@@ -41,7 +41,8 @@ public class Hotel extends  Place implements JSONable {
     }
 
     public Hotel(JSONObject o) {
-        this(new Place(o), (String)o.get("hotel type"), (Integer)o.get("rate"),
+        this(new Place(o), (String)o.get("hotel type"),
+                ((Long)o.get("rate")).intValue(),
                 (Double)o.get("km from city"), (Double)o.get("km from sea")
         );
     }
@@ -112,7 +113,7 @@ public class Hotel extends  Place implements JSONable {
         builder.append(hotelType);
         StringUtil.appendIfNotEmpty(builder, " ");
         if (rate > 0) {
-            builder.append("( ").append(rate).append(" stars)");
+            builder.append("(").append(rate).append(" stars)");
             StringUtil.appendIfNotEmpty(builder, " ");
         }
         builder.append(super.toString());

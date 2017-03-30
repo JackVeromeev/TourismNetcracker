@@ -121,13 +121,13 @@ public class Cruise implements VoucherType {
         if (name.length() > 0) {
             builder.append("Cruise \"").append(name).append("\"");
         }
-        builder.append("\"Depart from: ").append(departurePlace.toString());
-        builder.append("\"Arrive at: ").append(arrivalPlace.toString());
+        builder.append(".\n Depart from: ").append(departurePlace.toString());
+        builder.append(".\n Arrive at: ").append(arrivalPlace.toString());
         if (waterBodies.size() > 0) {
-            builder.append("\nCruise at");
+            builder.append("\n Cruise at");
             if (waterBodies.size() > 1) {
                 builder.append(":");
-            }
+            } else builder.append(" ");
             boolean firstElement = true;
             for (String waterBody : waterBodies) {
                 if (firstElement) {
@@ -138,7 +138,7 @@ public class Cruise implements VoucherType {
                 builder.append(waterBody);
             }
         }
-        builder.append(". Transport: ").append(transport.toString());
+        builder.append(".\n Transport: ").append(transport.toString());
         return builder.toString();
     }
 

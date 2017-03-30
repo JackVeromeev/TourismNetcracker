@@ -22,17 +22,20 @@ public class CustomizableVoucher implements JSONable {
     private List<LocalDateTime> availableStart;
     private List<Feeding> availableFeeding;
     private List<Transport> availableDeliveryTransport;
+    private double costPerDay;
 
     public CustomizableVoucher(VoucherType voucherType,
                                List<Integer> availableDuration,
                                List<LocalDateTime> availableStart,
                                List<Feeding> availableFeeding,
-                               List<Transport> availableDeliveryTransport) {
+                               List<Transport> availableDeliveryTransport,
+                               double costPerDay) {
         this.type = voucherType;
         this.availableDuration = availableDuration;
         this.availableStart = availableStart;
         this.availableFeeding = availableFeeding;
         this.availableDeliveryTransport = availableDeliveryTransport;
+        this.costPerDay = costPerDay;
     }
 
     public CustomizableVoucher(JSONObject o) {
@@ -40,16 +43,18 @@ public class CustomizableVoucher implements JSONable {
 
         type = factory.newVoucherType((JSONObject) o.get("type"));
 
+        costPerDay = (Double) o.get("cost per day");
+
         JSONArray durationArray = (JSONArray) o.get("available duration");
         availableDuration = new ArrayList<>(durationArray.size());
         for (Object duration : durationArray) {
-            availableDuration.add((Integer) duration);
+            availableDuration.add(((Long) duration).intValue());
         }
 
         JSONArray startArray = (JSONArray) o.get("available start");
         availableStart = new ArrayList<>(startArray.size());
         for (Object start : startArray) {
-            availableStart.add((LocalDateTime) start);
+            availableStart.add(LocalDateTime.parse((String)start));
         }
 
         JSONArray feedingArray = (JSONArray) o.get("available feeding");
@@ -109,6 +114,14 @@ public class CustomizableVoucher implements JSONable {
         this.availableDeliveryTransport = availableDeliveryTransport;
     }
 
+    public double getCostPerDay() {
+        return costPerDay;
+    }
+
+    public void setCostPerDay(double costPerDay) {
+        this.costPerDay = costPerDay;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -135,21 +148,58 @@ public class CustomizableVoucher implements JSONable {
                 + availableFeeding.hashCode();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(type.toString());
+
+        builder.append("\n Available duration: ");
+        String durationString = availableDuration.toString();
+        builder.append(
+                durationString.substring(1, durationString.length() - 1));
+        builder.append(" day(s).");
+        builder.append("\n Cost per day: ").append(costPerDay);
+
+        builder.append("\n Available start: ");
+        boolean firstElement = true;
+        for (LocalDateTime start : availableStart) {
+            if (firstElement) {
+                firstElement = false;
+            } else {
+                builder.append(", ");
+            }
+            builder.append(start.toString().replace('T', ' '));
+        }
+
+        builder.append("\n Available delivery transport:");
+        for (Transport transport : availableDeliveryTransport) {
+            builder.append("\n   ").append(transport.toString());
+        }
+
+        builder.append("\n Available feeding:");
+        for (Feeding feeding : availableFeeding) {
+            builder.append("\n   ").append(feeding.toString());
+        }
+
+        return builder.toString();
+    }
 
     @Override
     public JSONObject toJSONObject() {
         JSONObject o = new JSONObject();
         o.put("type", type.toJSONObject());
+        o.put("cost per day", costPerDay);
 
         JSONArray durationArray = new JSONArray();
-        for (int duration : availableDuration) {
+        for (long duration :
+                availableDuration) {
             durationArray.add(duration);
         }
         o.put("available duration", durationArray);
 
         JSONArray startArray = new JSONArray();
         for (LocalDateTime start : availableStart) {
-            startArray.add(start);
+            startArray.add(start.toString());
         }
         o.put("available start", startArray);
 

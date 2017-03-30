@@ -1,6 +1,8 @@
 package com.netcracker.labs.veromeyev.tourism.entity.feeding;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,10 +17,11 @@ class FeedingTest {
     Feeding feeding, newFeeding;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws ParseException {
         feeding = new Feeding(true, 22.8, "mramor beef");
-        JSONObject o = feeding.toJSONObject();
-        newFeeding = new Feeding(o);
+        String o = feeding.toJSONObject().toJSONString();
+        newFeeding = new Feeding((JSONObject) new JSONParser().parse(
+                feeding.toJSONObject().toString()));
     }
 
     @Test

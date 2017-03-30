@@ -71,7 +71,7 @@ public abstract class Transport implements JSONable {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append(description);
-        builder.append("\ncost: ").append(getCost());
+        builder.append(", cost: ").append(getCost());
         builder.append("; time on the way: ").append(getHoursOnWay());
         builder.append(" hours;");
         return builder.toString();

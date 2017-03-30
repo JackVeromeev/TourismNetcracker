@@ -1,6 +1,9 @@
 package com.netcracker.labs.veromeyev.tourism.entity.place;
 
 import com.netcracker.labs.veromeyev.tourism.entity.EntityFactory;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,10 +18,14 @@ class PlaceTest {
     Place place, newPlace;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws ParseException {
         place = new Place("BY", "Minsk", "Minsk", "89, Dzyarzhinskaha ave",
                 "Netcracker", "best firm ever");
-        newPlace = new EntityFactory().newPlace(place.toJSONObject());
+        newPlace = new EntityFactory().newPlace(
+                (JSONObject) new JSONParser().parse(
+                        place.toJSONObject().toString()
+                )
+        );
     }
 
     @Test

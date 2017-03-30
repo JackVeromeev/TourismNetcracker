@@ -77,7 +77,7 @@ public class Bus extends Transport {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("Bus: ").append(super.toString());
-        builder.append("\nTV: ").append(BooleanUtil.toYN(hasTV));
+        builder.append(". TV: ").append(BooleanUtil.toYN(hasTV));
         builder.append(", toilet: ").append(BooleanUtil.toYN(hasToilet));
         builder.append(", Wi-Fi: ").append(BooleanUtil.toYN(hasWifi));
         return builder.toString();

@@ -22,7 +22,7 @@ public class Ship extends Transport {
 
     public Ship(JSONObject o) {
         super(o);
-        this.decksAmount = (Integer) o.get("amount of decks");
+        this.decksAmount = ((Long) o.get("amount of decks")).intValue();
         this.hasPool = (Boolean) o.get("has pool");
     }
 
@@ -66,7 +66,7 @@ public class Ship extends Transport {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("Ship: ").append(super.toString());
-        builder.append("\nPool: ");
+        builder.append("Pool: ");
         builder.append(BooleanUtil.toYN(hasPool));
         builder.append(", ");
         builder.append(decksAmount);

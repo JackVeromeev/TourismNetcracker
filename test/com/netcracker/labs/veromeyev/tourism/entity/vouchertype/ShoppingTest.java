@@ -3,6 +3,9 @@ package com.netcracker.labs.veromeyev.tourism.entity.vouchertype;
 import com.netcracker.labs.veromeyev.tourism.entity.EntityFactory;
 import com.netcracker.labs.veromeyev.tourism.entity.place.Place;
 import com.netcracker.labs.veromeyev.tourism.entity.place.Shop;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +21,7 @@ class ShoppingTest {
     VoucherType shopping, newShoping;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws ParseException {
         shopping = new Shopping(
                 new ArrayList<Shop>() {{
                     add(new Shop(
@@ -34,7 +37,11 @@ class ShoppingTest {
                 }}
         );
         newShoping =
-                new EntityFactory().newVoucherType(shopping.toJSONObject());
+                new EntityFactory().newVoucherType(
+                        (JSONObject) new JSONParser().parse(
+                                shopping.toJSONObject().toString()
+                        )
+                );
     }
 
     @Test

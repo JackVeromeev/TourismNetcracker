@@ -1,6 +1,9 @@
 package com.netcracker.labs.veromeyev.tourism.entity.place;
 
 import com.netcracker.labs.veromeyev.tourism.entity.EntityFactory;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +19,7 @@ class MedicalCenterTest {
     Place medicalCenter, newMedicalCenter;
 
     @BeforeEach
-    void setUp() {
+    void setUp() throws ParseException {
         medicalCenter = new MedicalCenter(
                 new Place("BY", "Minsk", "Minsk", "89, Dzyarzhinskaha ave",
                         "BSUIR hostel #4", "best hostel ever"),
@@ -26,8 +29,11 @@ class MedicalCenterTest {
                     add("coprophilia");
                 }}
         );
-        newMedicalCenter =
-                new EntityFactory().newPlace(medicalCenter.toJSONObject());
+        newMedicalCenter = new EntityFactory().newPlace(
+                (JSONObject) new JSONParser().parse(
+                        medicalCenter.toJSONObject().toString()
+                )
+        );
     }
 
     @Test

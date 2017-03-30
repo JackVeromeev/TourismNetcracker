@@ -57,7 +57,7 @@ public class Recreation implements VoucherType {
 
     @Override
     public String toString() {
-        return "Recreation at" + hotel.toString();
+        return "Recreation at " + hotel.toString();
     }
 
     @Override

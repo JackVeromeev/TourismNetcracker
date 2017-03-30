@@ -71,8 +71,9 @@ public class Shopping implements VoucherType {
         if (shops.size() == 1) {
             builder.append(" ").append(shops.get(0));
         } else {
+            builder.append(":");
             for (Shop shop : shops) {
-                builder.append("\n").append(shop.toString());
+                builder.append("\n   ").append(shop.toString());
             }
         }
         return builder.toString();
