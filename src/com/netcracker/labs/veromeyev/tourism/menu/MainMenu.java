@@ -41,9 +41,9 @@ public class MainMenu {
                 case 2:
                     filterMenu();
                     break;
-//                case 3:
-//                    sortMenu();
-//                    break;
+                case 3:
+                    sortMenu();
+                    break;
             }
         }
     }
@@ -75,6 +75,12 @@ public class MainMenu {
         filterUpdated = false;
     }
 
+    private void sortMenu() {
+        SortMenu sortMenu = new SortMenu();
+        sortMenu.launch();
+        sortUpdated = false;
+    }
+
     /**
      * filters and sorts shown data if filter or comparator is updated
      */
@@ -88,7 +94,7 @@ public class MainMenu {
             }
             filterUpdated = true;
             sortUpdated = true;
-        } else if (sortUpdated) {
+        } else if (!sortUpdated) {
             if (Main.getComparator() != null) {
                 filteredList.sort(Main.getComparator());
             }

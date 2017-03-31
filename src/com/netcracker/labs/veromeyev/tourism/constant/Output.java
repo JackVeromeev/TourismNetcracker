@@ -39,6 +39,14 @@ public class Output {
             "Select preferred type of feeding:\n1 - vegetarian" +
                     "\n2 - non-vegetarian"
     };
+    public static final String[] SORT_MENU = {
+            "Current sorting setting: ",
+            "\nPlease, choose the operation\n1 - set sorting" +
+                    "\n2 - reset sorting\n0 - back",
+            "\nPlease, choose the sort" +
+                    "\n1 - at cost per day in increasing order" +
+                    "\n2 - at cost per day in decreasing order\n0 - back"
+    };
     public static final String PRESS_ANY_KEY_TO_CONTINUE
             = "\nPress any key to continue";
 }

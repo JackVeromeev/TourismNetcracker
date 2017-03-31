@@ -17,11 +17,13 @@ public class FilterMenu {
     private ComplexVoucherFilter complexFilter;
     private Input in;
     private boolean exitFlag;
+    private VoucherFilterFactory factory;
 
     public FilterMenu(ComplexVoucherFilter complexFilter) {
         this.complexFilter = complexFilter;
         in = new Input();
         exitFlag = false;
+        factory = new VoucherFilterFactory();
     }
 
     public void launch() {
@@ -75,14 +77,12 @@ public class FilterMenu {
         double lowestCost = in.getDouble();
         System.out.println(Output.FILTER_MENU[4]);
         double highestCost = in.getDouble();
-        complexFilter.add(new VoucherFilterFactory().
-                newCostFilter(lowestCost, highestCost));
+        complexFilter.add(factory.newCostFilter(lowestCost, highestCost));
     }
 
     private void transportFilter() {
         System.out.println(Output.FILTER_MENU[5]);
-        complexFilter.add(new VoucherFilterFactory().
-                newDeliveryTransportFilter(in.getInt(1,3)));
+        complexFilter.add(factory.newDeliveryTransportFilter(in.getInt(1,3)));
     }
 
     private void startFilter() {
@@ -90,9 +90,7 @@ public class FilterMenu {
         LocalDate nearest = in.getDate();
         System.out.println(Output.FILTER_MENU[7]);
         LocalDate furthest = in.getDate();
-        complexFilter.add(new VoucherFilterFactory().newStartFilter(
-                nearest, furthest
-        ));
+        complexFilter.add(factory.newStartFilter(nearest, furthest));
     }
 
     private void durationFilter() {
@@ -100,20 +98,17 @@ public class FilterMenu {
         int minDuration = in.getInt();
         System.out.println(Output.FILTER_MENU[9]);
         int maxDuration = in.getInt();
-        complexFilter.add(new VoucherFilterFactory().
-                newDurationFilter(minDuration, maxDuration));
+        complexFilter.add(factory.newDurationFilter(minDuration, maxDuration));
     }
 
     private void voucherTypeFilter() {
         System.out.println(Output.FILTER_MENU[10]);
-        complexFilter.add(new VoucherFilterFactory().
-                newVoucherTypeFilter(in.getInt(1, 5)));
+        complexFilter.add(factory.newVoucherTypeFilter(in.getInt(1, 5)));
     }
 
     private void feedingFilter() {
         System.out.println(Output.FILTER_MENU[11]);
         int answer = in.getInt();
-        complexFilter.add(new VoucherFilterFactory().
-                newVegetarianFilter(answer == 1));
+        complexFilter.add(factory.newVegetarianFilter(answer == 1));
     }
 }
