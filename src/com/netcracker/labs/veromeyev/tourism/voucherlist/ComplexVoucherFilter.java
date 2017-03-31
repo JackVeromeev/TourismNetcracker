@@ -14,6 +14,10 @@ public class ComplexVoucherFilter implements VoucherFilter{
 
     private List<VoucherFilter> filters;
 
+    public ComplexVoucherFilter() {
+        filters = new LinkedList<>();
+    }
+
     public List<VoucherFilter> getFilters() {
         return filters;
     }

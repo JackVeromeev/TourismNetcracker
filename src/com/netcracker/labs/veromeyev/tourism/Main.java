@@ -1,22 +1,39 @@
 package com.netcracker.labs.veromeyev.tourism;
 
-
-import com.netcracker.labs.veromeyev.tourism.entity.voucher.CustomizableVoucher;
+import com.netcracker.labs.veromeyev.tourism.menu.MainMenu;
 import com.netcracker.labs.veromeyev.tourism.util.json.JSONFileHandler;
+import com.netcracker.labs.veromeyev.tourism.voucherlist.ComplexVoucherFilter;
+import com.netcracker.labs.veromeyev.tourism.voucherlist.VoucherComparator;
+import com.netcracker.labs.veromeyev.tourism.voucherlist.VoucherList;
 
-import java.util.List;
-
-class Main {
-
+public class Main {
+    private static ComplexVoucherFilter filter;
+    private static VoucherComparator comparator;
+    private static VoucherList customizableVouchers;
 
     public static void main(String[] args) {
-        //VoucherList all = new VoucherList(new JSONFileHandler().readFile());
+        filter = new ComplexVoucherFilter();
+        setComparator(null);
+        customizableVouchers =
+                new VoucherList(new JSONFileHandler().readFile());
+        MainMenu mainMenu = new MainMenu();
+        mainMenu.launch();
 
-
-        List<CustomizableVoucher> l = new JSONFileHandler().readFile();
-        for (CustomizableVoucher v : l) {
-            System.out.println(v.toString() + "\n\n");
-        }
     }
 
+    public static ComplexVoucherFilter getFilter() {
+        return filter;
+    }
+
+    public static VoucherComparator getComparator() {
+        return comparator;
+    }
+
+    public static void setComparator(VoucherComparator comparator) {
+        Main.comparator = comparator;
+    }
+
+    public static VoucherList getCustomizableVouchers() {
+        return customizableVouchers;
+    }
 }

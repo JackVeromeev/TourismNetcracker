@@ -153,14 +153,14 @@ public class CustomizableVoucher implements JSONable {
         StringBuilder builder = new StringBuilder();
         builder.append(type.toString());
 
-        builder.append("\n Available duration: ");
+        builder.append("\n    Available duration: ");
         String durationString = availableDuration.toString();
         builder.append(
                 durationString.substring(1, durationString.length() - 1));
         builder.append(" day(s).");
-        builder.append("\n Cost per day: ").append(costPerDay);
+        builder.append("\n    Cost per day: ").append(costPerDay);
 
-        builder.append("\n Available start: ");
+        builder.append("\n    Available start: ");
         boolean firstElement = true;
         for (LocalDateTime start : availableStart) {
             if (firstElement) {
@@ -171,14 +171,14 @@ public class CustomizableVoucher implements JSONable {
             builder.append(start.toString().replace('T', ' '));
         }
 
-        builder.append("\n Available delivery transport:");
+        builder.append("\n    Available delivery transport:");
         for (Transport transport : availableDeliveryTransport) {
-            builder.append("\n   ").append(transport.toString());
+            builder.append("\n      ").append(transport.toString());
         }
 
-        builder.append("\n Available feeding:");
+        builder.append("\n    Available feeding:");
         for (Feeding feeding : availableFeeding) {
-            builder.append("\n   ").append(feeding.toString());
+            builder.append("\n      ").append(feeding.toString());
         }
 
         return builder.toString();

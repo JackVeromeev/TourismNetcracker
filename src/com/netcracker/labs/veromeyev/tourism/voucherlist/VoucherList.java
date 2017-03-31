@@ -21,14 +21,14 @@ public class VoucherList {
         return list;
     }
 
-    public ArrayList<CustomizableVoucher> filter(VoucherFilter filter) {
+    public VoucherList filter(VoucherFilter filter) {
         ArrayList<CustomizableVoucher> filtered = new ArrayList<>();
         for (CustomizableVoucher voucher : list) {
             if (filter.fit(voucher)) {
                 filtered.add(voucher);
             }
         }
-        return filtered;
+        return new VoucherList(filtered);
     }
 
     public void sort(VoucherComparator comparator) {

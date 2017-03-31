@@ -66,9 +66,9 @@ public class Ship extends Transport {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("Ship: ").append(super.toString());
-        builder.append("Pool: ");
+        builder.append(" Pool: ");
         builder.append(BooleanUtil.toYN(hasPool));
-        builder.append(", ");
+        builder.append("; ");
         builder.append(decksAmount);
         builder.append(" deck(s)");
         return builder.toString();

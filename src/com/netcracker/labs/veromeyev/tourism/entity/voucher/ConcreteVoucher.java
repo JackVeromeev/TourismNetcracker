@@ -4,6 +4,7 @@ import com.netcracker.labs.veromeyev.tourism.entity.EntityFactory;
 import com.netcracker.labs.veromeyev.tourism.entity.JSONable;
 import com.netcracker.labs.veromeyev.tourism.entity.feeding.Feeding;
 import com.netcracker.labs.veromeyev.tourism.entity.transport.Transport;
+import com.netcracker.labs.veromeyev.tourism.entity.vouchertype.Cruise;
 import com.netcracker.labs.veromeyev.tourism.entity.vouchertype.VoucherType;
 import org.json.simple.JSONObject;
 
@@ -104,8 +105,12 @@ public class ConcreteVoucher implements JSONable{
     }
 
     public double getTotalCost() {
-        return duration * (costPerDay + feeding.getCostPerDay())
-                + deliveryTransport.getCost();
+        double cost = duration * (costPerDay + feeding.getCostPerDay());
+        cost += deliveryTransport.getCost();
+        if (type instanceof Cruise) {
+            cost += ((Cruise) type).getTransport().getCost();
+        }
+        return cost;
     }
 
     @Override
@@ -133,6 +138,28 @@ public class ConcreteVoucher implements JSONable{
                 + feeding.hashCode();
     }
 
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(type.toString());
+
+        builder.append("\n  Duration: ").append(duration).append(" day(s).");
+        builder.append("\n  Cost per day: ").append(costPerDay);
+
+        builder.append("\n  Start: ");
+        builder.append(start.toString().replace('T', ' '));
+
+        builder.append("\n  Delivery transport: ");
+        builder.append(deliveryTransport.toString());
+
+        builder.append("\n  Feeding: ");
+        builder.append(feeding.toString());
+
+        builder.append("\n  Total cost: ");
+        builder.append(getTotalCost());
+
+        return builder.toString();
+    }
 
     @Override
     public JSONObject toJSONObject() {
