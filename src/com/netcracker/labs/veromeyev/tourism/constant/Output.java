@@ -26,8 +26,8 @@ public class Output {
                     "\n1 - voucher type\n2 - duration" +
                     "\n3 - start date\n4 - feeding" +
                     "\n5 - delivery transport\n6 - cost per day\n0 - back",
-            "Enter lowest cost per day",
-            "Enter highest cost per day",
+            "Enter minimum cost per day",
+            "Enter maximum cost per day",
             "Select preferred delivery transport:\n1 - bus\n2 - ship" +
                     "\n3 - plane",
             "Enter nearest start date (year month day through space)",
@@ -42,10 +42,14 @@ public class Output {
     public static final String[] SORT_MENU = {
             "Current sorting setting: ",
             "\nPlease, choose the operation\n1 - set sorting" +
-                    "\n2 - reset sorting\n0 - back",
+                    "\n0 - back",
             "\nPlease, choose the sort" +
-                    "\n1 - at cost per day in increasing order" +
-                    "\n2 - at cost per day in decreasing order\n0 - back"
+                    "\n1 - at cost per day" +
+                    "\n2 - at minimal duration" +
+                    "\n3 - at maximal duration\n0 - back",
+            "\nPlease, choose the direction" +
+                    "\n1 - in increasing order" +
+                    "\n2 - at cost per day in decreasing order"
     };
     public static final String PRESS_ANY_KEY_TO_CONTINUE
             = "\nPress any key to continue";

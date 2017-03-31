@@ -8,33 +8,77 @@ import com.netcracker.labs.veromeyev.tourism.entity.voucher.CustomizableVoucher;
  * @author Jack Veromeyev
  */
 public class VoucherComparatorFactory {
-    public VoucherComparator newCostIncreasingComparator() {
+    public VoucherComparator newCostIncreasingComparator(boolean increase) {
         return new VoucherComparator() {
             @Override
             public boolean compare(CustomizableVoucher vLeft,
                                    CustomizableVoucher vRight) {
-                return vLeft.getCostPerDay() < vRight.getCostPerDay();
+                return (vLeft.getCostPerDay() < vRight.getCostPerDay())
+                        ^ increase;
             }
 
             @Override
             public String getDescription() {
-                return "at cost per day in increasing order";
+                return "at cost per day in "
+                        + (increase ? "increasing" : "decreasing")
+                        + " order";
             }
         };
     }
 
-    public VoucherComparator newCostDecreasingComparator() {
+    public VoucherComparator newMinimalDurationComparator(boolean increase) {
         return new VoucherComparator() {
             @Override
             public boolean compare(CustomizableVoucher vLeft,
                                    CustomizableVoucher vRight) {
-                return vLeft.getCostPerDay() > vRight.getCostPerDay();
+                return (minimalDuration(vLeft) > minimalDuration(vRight))
+                        ^ increase;
             }
 
             @Override
             public String getDescription() {
-                return "at cost per day in decreasing order";
+                return "at minimal duration in "
+                        + (increase ? "increasing" : "decreasing")
+                        + " order";
             }
         };
+    }
+
+    public VoucherComparator newMaximalDurationComparator(boolean increase) {
+        return new VoucherComparator() {
+            @Override
+            public boolean compare(CustomizableVoucher vLeft,
+                                   CustomizableVoucher vRight) {
+                return (maximalDuration(vLeft) > maximalDuration(vRight))
+                        ^ increase;
+            }
+
+            @Override
+            public String getDescription() {
+                return "at maximal duration in "
+                        + (increase ? "increasing" : "decreasing")
+                        + " order";
+            }
+        };
+    }
+
+    private int minimalDuration(CustomizableVoucher voucher) {
+        int result = voucher.getAvailableDuration().get(0);
+        for (int duration : voucher.getAvailableDuration()) {
+            if (result > duration) {
+                result = duration;
+            }
+        }
+        return result;
+    }
+
+    private int maximalDuration(CustomizableVoucher voucher) {
+        int result = voucher.getAvailableDuration().get(0);
+        for (int duration : voucher.getAvailableDuration()) {
+            if (result < duration) {
+                result = duration;
+            }
+        }
+        return result;
     }
 }

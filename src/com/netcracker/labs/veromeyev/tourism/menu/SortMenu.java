@@ -26,15 +26,12 @@ public class SortMenu {
             System.out.println(Output.SORT_MENU[0]);
             showSortDescription();
             System.out.println(Output.SORT_MENU[1]);
-            switch (in.getInt(0, 2)) {
+            switch (in.getInt(0, 1)) {
                 case 0:
                     exitFlag = true;
                     break;
                 case 1:
                     setSort();
-                    break;
-                case 2:
-                    Main.setComparator(null);
                     break;
             }
         }
@@ -43,17 +40,34 @@ public class SortMenu {
     private void setSort() {
         System.out.println(Output.SORT_MENU[2]);
         VoucherComparatorFactory factory = new VoucherComparatorFactory();
-        switch (in.getInt(0, 2)) {
+        switch (in.getInt(0, 3)) {
             case 1:
-                Main.setComparator(factory.newCostIncreasingComparator());
+                Main.setComparator(factory.newCostIncreasingComparator(
+                        chooseDirection()));
                 break;
             case 2:
-                Main.setComparator(factory.newCostDecreasingComparator());
+                Main.setComparator(factory.newMinimalDurationComparator(
+                        chooseDirection()));
+                break;
+            case 3:
+                Main.setComparator(factory.newMaximalDurationComparator(
+                        chooseDirection()));
                 break;
             case 0:
             default:
                 return;
         }
+    }
+
+    /**
+     * chooses a direction of sorting
+     * @return true if in increasing order, false if in decreasing
+     */
+    private boolean chooseDirection() {
+        System.out.println(Output.SORT_MENU[3]);
+        VoucherComparatorFactory factory = new VoucherComparatorFactory();
+        return (in.getInt(1, 2) == 1);
+
     }
 
     private void showSortDescription() {
