@@ -1,4 +1,4 @@
-package com.netcracker.labs.veromeyev.tourism.voucherlist;
+package com.netcracker.labs.veromeyev.tourism.voucherlist.filter;
 
 import com.netcracker.labs.veromeyev.tourism.entity.voucher.CustomizableVoucher;
 
@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author Jack Veromeyev
  */
-public class ComplexVoucherFilter implements VoucherFilter{
+public class ComplexVoucherFilter implements VoucherFilter {
 
     private List<VoucherFilter> filters;
 

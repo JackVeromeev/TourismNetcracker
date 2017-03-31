@@ -1,4 +1,4 @@
-package com.netcracker.labs.veromeyev.tourism.voucherlist;
+package com.netcracker.labs.veromeyev.tourism.voucherlist.comparator;
 
 /**
  * Created by jack on 30/03/17.

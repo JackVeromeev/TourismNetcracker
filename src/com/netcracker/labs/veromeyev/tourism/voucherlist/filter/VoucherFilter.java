@@ -1,4 +1,4 @@
-package com.netcracker.labs.veromeyev.tourism.voucherlist;
+package com.netcracker.labs.veromeyev.tourism.voucherlist.filter;
 
 import com.netcracker.labs.veromeyev.tourism.entity.voucher.CustomizableVoucher;
 
@@ -7,7 +7,7 @@ import com.netcracker.labs.veromeyev.tourism.entity.voucher.CustomizableVoucher;
  *
  * @author Jack Veromeyev
  */
-public interface VoucherComparator {
-    boolean compare(CustomizableVoucher vLeft, CustomizableVoucher vRight);
+public interface VoucherFilter {
+    boolean fit(CustomizableVoucher voucher);
     String getDescription();
 }

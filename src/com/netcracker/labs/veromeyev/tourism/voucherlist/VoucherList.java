@@ -1,6 +1,8 @@
 package com.netcracker.labs.veromeyev.tourism.voucherlist;
 
 import com.netcracker.labs.veromeyev.tourism.entity.voucher.CustomizableVoucher;
+import com.netcracker.labs.veromeyev.tourism.voucherlist.comparator.VoucherComparator;
+import com.netcracker.labs.veromeyev.tourism.voucherlist.filter.VoucherFilter;
 
 import java.util.ArrayList;
 

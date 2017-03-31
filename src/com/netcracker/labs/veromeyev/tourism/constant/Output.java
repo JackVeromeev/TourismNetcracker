@@ -6,8 +6,8 @@ package com.netcracker.labs.veromeyev.tourism.constant;
  * @author Jack Veromeyev
  */
 public class Output {
-    public static final String MENU_HEADER = "Wellcome to NetCrackerTour!\n" +
-        "Heare are available vouchers for your order:\n";
+    public static final String MENU_HEADER = "Welcome to NetCrackerTour!\n" +
+        "Here are available vouchers for your order:\n";
     public static final String MAIN_MENU = "Please, choose the operation:\n" +
             "1 - Select voucher to make an order\n" +
             "2 - Filter watched vouchers\n3 - Sort watched vouchers\n0 - exit";
@@ -18,5 +18,27 @@ public class Output {
             "Enter the number of chosen feeding",
             "Enter the number of chosen delivery transport"
     };
-    public static final String PRESS_ANYKEY = "\nPress any key to continue";
+    public static final String[] FILTER_MENU = {
+            "Current filter settings: ",
+            "\nPlease, choose the operation\n1 - add filter" +
+                    "\n2 - reset filter\n0 - back",
+            "\nPlease, select the filter type:" +
+                    "\n1 - voucher type\n2 - duration" +
+                    "\n3 - start date\n4 - feeding" +
+                    "\n5 - delivery transport\n6 - cost per day\n0 - back",
+            "Enter lowest cost per day",
+            "Enter highest cost per day",
+            "Select preferred delivery transport:\n1 - bus\n2 - ship" +
+                    "\n3 - plane",
+            "Enter nearest start date (year month day through space)",
+            "Enter furthest start date (year month day through space)",
+            "Enter minimum duration",
+            "Enter maximum duration",
+            "Select preferred type of voucher:\n1 - cruise\n2 - excursion\n" +
+                    "3 - recreation\n4 - shopping\n5 - treatment",
+            "Select preferred type of feeding:\n1 - vegetarian" +
+                    "\n2 - non-vegetarian"
+    };
+    public static final String PRESS_ANY_KEY_TO_CONTINUE
+            = "\nPress any key to continue";
 }
