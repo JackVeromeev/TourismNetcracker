@@ -10,9 +10,6 @@ import org.json.simple.JSONObject;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by jack on 23/03/17.
- */
 public class Excursion implements VoucherType {
 
     private String name;

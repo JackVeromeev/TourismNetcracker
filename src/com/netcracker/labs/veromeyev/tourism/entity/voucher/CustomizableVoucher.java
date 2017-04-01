@@ -12,9 +12,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by jack on 23/03/17.
- */
 public class CustomizableVoucher implements JSONable {
 
     private VoucherType type;

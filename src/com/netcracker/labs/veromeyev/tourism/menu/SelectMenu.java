@@ -9,11 +9,6 @@ import com.netcracker.labs.veromeyev.tourism.util.Input;
 
 import java.time.LocalDateTime;
 
-/**
- * Created by jack on 30/03/17.
- *
- * @author Jack Veromeyev
- */
 public class SelectMenu {
 
     private CustomizableVoucher voucher;

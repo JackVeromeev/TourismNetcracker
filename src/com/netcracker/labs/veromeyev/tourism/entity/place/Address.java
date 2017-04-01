@@ -4,10 +4,6 @@ import com.netcracker.labs.veromeyev.tourism.entity.JSONable;
 import com.netcracker.labs.veromeyev.tourism.util.StringUtil;
 import org.json.simple.JSONObject;
 
-/**
- * Created by jack on 21/03/17.
- * @author jack veromeyev
- */
 public class Address implements JSONable {
 
     private String state;

@@ -10,9 +10,6 @@ import org.json.simple.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by jack on 22/03/17.
- */
 public class Recreation implements VoucherType {
 
     private Hotel hotel;

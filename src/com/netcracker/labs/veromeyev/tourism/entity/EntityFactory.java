@@ -14,9 +14,6 @@ import com.netcracker.labs.veromeyev.tourism.util.json.JsonWithType;
 import org.jetbrains.annotations.Nullable;
 import org.json.simple.JSONObject;
 
-/**
- * Created by jack on 28/03/17.
- */
 public class EntityFactory {
     @Nullable
     public Place newPlace(JSONObject o) {

@@ -6,9 +6,6 @@ import org.json.simple.JSONObject;
 
 import java.util.List;
 
-/**
- * Created by jack on 21/03/17.
- */
 public interface VoucherType extends JSONable {
 
     String getFullDescription();

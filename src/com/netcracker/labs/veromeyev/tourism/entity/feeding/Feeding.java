@@ -4,9 +4,6 @@ import com.netcracker.labs.veromeyev.tourism.entity.JSONable;
 import com.netcracker.labs.veromeyev.tourism.util.BooleanUtil;
 import org.json.simple.JSONObject;
 
-/**
- * Created by jack on 23/03/17.
- */
 public class Feeding implements JSONable {
 
     private boolean vegetarian;

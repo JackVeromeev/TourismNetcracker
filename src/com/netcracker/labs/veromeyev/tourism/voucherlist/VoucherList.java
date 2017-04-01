@@ -6,11 +6,6 @@ import com.netcracker.labs.veromeyev.tourism.voucherlist.filter.VoucherFilter;
 
 import java.util.ArrayList;
 
-/**
- * Created by jack on 30/03/17.
- *
- * @author Jack Veromeyev
- */
 public class VoucherList {
 
     private ArrayList<CustomizableVoucher> list;

@@ -12,11 +12,6 @@ import com.netcracker.labs.veromeyev.tourism.entity.vouchertype.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-/**
- * Created by jack on 31/03/17.
- *
- * @author Jack Veromeyev
- */
 public class VoucherFilterFactory {
 
     public VoucherFilter newCostFilter(double lowestCost, double highestCost) {

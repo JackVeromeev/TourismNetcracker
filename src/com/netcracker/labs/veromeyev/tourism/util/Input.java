@@ -3,11 +3,6 @@ package com.netcracker.labs.veromeyev.tourism.util;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-/**
- * Created by jack on 30/03/17.
- *
- * @author Jack Veromeyev
- */
 public class Input {
 
     public static final String ENTER = "> ";

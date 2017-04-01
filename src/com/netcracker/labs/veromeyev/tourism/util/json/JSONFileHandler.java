@@ -11,11 +11,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by jack on 30/03/17.
- *
- * @author Jack Veromeyev
- */
 public class JSONFileHandler {
 
     public static final String FILE_NAME = "customizable vouchers.json";

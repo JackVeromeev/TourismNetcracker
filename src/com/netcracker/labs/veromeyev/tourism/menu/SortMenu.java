@@ -6,11 +6,6 @@ import com.netcracker.labs.veromeyev.tourism.util.Input;
 import com.netcracker.labs.veromeyev.tourism.voucherlist.comparator.VoucherComparator;
 import com.netcracker.labs.veromeyev.tourism.voucherlist.comparator.VoucherComparatorFactory;
 
-/**
- * Created by jack on 31/03/17.
- *
- * @author Jack Veromeyev
- */
 public class SortMenu {
 
     private boolean exitFlag;

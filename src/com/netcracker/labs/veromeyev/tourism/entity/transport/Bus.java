@@ -6,9 +6,6 @@ import com.netcracker.labs.veromeyev.tourism.util.BooleanUtil;
 import com.netcracker.labs.veromeyev.tourism.util.json.JsonWithType;
 import org.json.simple.JSONObject;
 
-/**
- * Created by jack on 23/03/17.
- */
 public class Bus extends Transport {
 
     private boolean hasTV;

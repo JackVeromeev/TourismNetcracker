@@ -1,10 +1,5 @@
 package com.netcracker.labs.veromeyev.tourism.constant;
 
-/**
- * Created by jack on 30/03/17.
- *
- * @author Jack Veromeyev
- */
 public class Output {
     public static final String MENU_HEADER = "Welcome to NetCrackerTour!\n" +
         "Here are available vouchers for your order:\n";

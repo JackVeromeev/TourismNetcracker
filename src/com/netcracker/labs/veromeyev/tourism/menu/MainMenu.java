@@ -7,11 +7,6 @@ import com.netcracker.labs.veromeyev.tourism.util.Input;
 import com.netcracker.labs.veromeyev.tourism.voucherlist.VoucherList;
 import com.netcracker.labs.veromeyev.tourism.voucherlist.comparator.VoucherComparator;
 
-/**
- * Created by jack on 30/03/17.
- *
- * @author Jack Veromeyev
- */
 public class MainMenu {
 
     private boolean filterUpdated;

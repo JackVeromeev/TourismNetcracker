@@ -6,9 +6,6 @@ import com.netcracker.labs.veromeyev.tourism.util.StringUtil;
 import com.netcracker.labs.veromeyev.tourism.util.json.JsonWithType;
 import org.json.simple.JSONObject;
 
-/**
- * Created by jack on 21/03/17.
- */
 public class Place implements JSONable {
 
     protected Address address;

@@ -1,8 +1,5 @@
 package com.netcracker.labs.veromeyev.tourism.util;
 
-/**
- * Created by jack on 21/03/17.
- */
 public class StringUtil {
 
     /**

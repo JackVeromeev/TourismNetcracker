@@ -10,9 +10,6 @@ import org.json.simple.JSONObject;
 
 import java.time.LocalDateTime;
 
-/**
- * Created by jack on 23/03/17.
- */
 public class ConcreteVoucher implements JSONable{
 
     private VoucherType type;

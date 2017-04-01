@@ -5,11 +5,6 @@ import com.netcracker.labs.veromeyev.tourism.entity.voucher.CustomizableVoucher;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by jack on 30/03/17.
- *
- * @author Jack Veromeyev
- */
 public class ComplexVoucherFilter implements VoucherFilter {
 
     private List<VoucherFilter> filters;

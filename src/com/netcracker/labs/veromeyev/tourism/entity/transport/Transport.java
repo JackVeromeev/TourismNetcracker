@@ -3,9 +3,6 @@ package com.netcracker.labs.veromeyev.tourism.entity.transport;
 import com.netcracker.labs.veromeyev.tourism.entity.JSONable;
 import org.json.simple.JSONObject;
 
-/**
- * Created by jack on 23/03/17.
- */
 public abstract class Transport implements JSONable {
 
     private double cost;

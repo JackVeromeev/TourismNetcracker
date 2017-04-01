@@ -43,6 +43,7 @@ public class JsonWithType {
     }
 
 
+
     public JSONObject getInnerObject() {
         return (JSONObject) this.getObject().get(INNER_OBJECT);
     }
@@ -55,6 +56,11 @@ public class JsonWithType {
         this.object.put(TYPE, type);
     }
 
+    /**
+     * Converts to JSON object with type
+     * @return JSONObject with structure like "type":"%your_type",
+     * "inner object":{%your_object_data%}
+     */
     public JSONObject getObject() {
         return object;
     }

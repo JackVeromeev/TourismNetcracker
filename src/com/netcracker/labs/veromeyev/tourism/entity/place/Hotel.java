@@ -6,9 +6,6 @@ import com.netcracker.labs.veromeyev.tourism.util.StringUtil;
 import com.netcracker.labs.veromeyev.tourism.util.json.JsonWithType;
 import org.json.simple.JSONObject;
 
-/**
- * Created by jack on 22/03/17.
- */
 public class Hotel extends  Place implements JSONable {
 
     private String hotelType;
